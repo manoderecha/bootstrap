@@ -1,14 +1,23 @@
 // Striped buttons
 // --------------------------------------------------
 .btn-striped[disabled] {
-    #gradient > .striped(auto, -45deg, .15);
     .background-size(40px 40px);
     .progress.active .bar;
-    .opacity(70);
 
     &:hover {
-	.transition(none);
+		.transition(none);
     }
+}
+
+.btn-striped.btn-default[disabled] {
+	#gradient > .striped(auto, -45deg, .45);
+    .opacity(90);
+}
+
+.btn-striped.btn-primary[disabled], .btn-striped.btn-info[disabled], .btn-striped.btn-success[disabled],
+.btn-striped.btn-warning[disabled], .btn-striped.btn-danger[disabled], .btn-striped.btn-inverse[disabled] {
+    #gradient > .striped(auto, -45deg, .15);
+    .opacity(80);
 }
 
 // Active and waiting icons
@@ -69,6 +78,24 @@ tr.disabled {
 
 // Priorities + Statuses
 // --------------------------------------------------
+.elementEditableGradient(@primary-color) {
+	&.editable {
+		#gradient > .vertical(lighten(@primary-color, 3%), darken(@primary-color, 7%));
+	}
+}
+
+.elementEditableCaret(@caretColor) {
+	.caret {
+		margin: 6px 1px 0;
+		border-top-color: @caretColor;
+		opacity: 0.75;
+	}
+
+	&:hover .caret {
+		opacity: 1;
+	}
+}
+
 span.label.status, span.label.priority {
 	display: inline-block;
 	cursor: default;
@@ -141,6 +168,12 @@ span.label.status {
 
 // Priorities
 // --------------------------------------------------
+.priority-mixin(@main-color) {
+	background-color: @main-color;
+	border-color: darken(@main-color, @priority-border-darken-by);
+	.elementEditableGradient(@main-color);
+}
+
 span.label.priority {
 	border-style: solid;
 	border-width: 1px;
@@ -153,58 +186,27 @@ span.label.priority {
 	}
 
 	&[data-priority="1"] {
-		background-color: @priority-urgent;
-		border-color: darken(@priority-urgent, @priority-border-darken-by);
-		.elementEditableGradient(@priority-urgent);
+		.priority-mixin(@priority-urgent);
 	}
 
 	&[data-priority="2"] {
-		background-color: @priority-too-high;
-		border-color: darken(@priority-too-high, @priority-border-darken-by);
-		.elementEditableGradient(@priority-too-high);
+		.priority-mixin(@priority-too-high);
 	}
 
 	&[data-priority="3"] {
-		background-color: @priority-high;
-		border-color: darken(@priority-high, @priority-border-darken-by);
-		.elementEditableGradient(@priority-high);
+		.priority-mixin(@priority-high);
 	}
 
 	&[data-priority="4"] {
-		background-color: @priority-normal;
-		border-color: darken(@priority-normal, @priority-border-darken-by);
-		.elementEditableGradient(@priority-normal);
+		.priority-mixin(@priority-normal);
 	}
 
 	&[data-priority="5"] {
-		background-color: @priority-low;
-		border-color: darken(@priority-low, @priority-border-darken-by);
-		.elementEditableGradient(@priority-low);
+		.priority-mixin(@priority-low);
 	}
 
 	&[data-priority="6"] {
-		background-color: @priority-too-low;
-		border-color: darken(@priority-too-low, @priority-border-darken-by);
-		.elementEditableGradient(@priority-too-low);
-	}
-}
-
-
-.elementEditableGradient(@primary-color) {
-	&.editable {
-		#gradient > .vertical(lighten(@primary-color, 3%), darken(@primary-color, 7%));
-	}
-}
-
-.elementEditableCaret(@caretColor) {
-	.caret {
-		margin: 6px 1px 0;
-		border-top-color: @caretColor;
-		opacity: 0.75;
-	}
-
-	&:hover .caret {
-		opacity: 1;
+		.priority-mixin(@priority-too-low);
 	}
 }
 
@@ -329,19 +331,8 @@ span.label.priority {
 
 .notice-score {
 	span {
-		//background-color: #eee;
-		//border: 1px solid #ddd;
-		//border-right-width: 0;
 		margin-right: 5px;
-		//.border-radius(0);
-
-		/*&:first-child {
-			.border-radius(@notice-border-radius, 0, 0, @notice-border-radius);
-		}*/
-
 		&:last-child {
-			//.border-radius(0, @notice-border-radius, @notice-border-radius, 0);
-			//border-right-width: 1px;
 			margin-right: 0px;
 		}
 	}
