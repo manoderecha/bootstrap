@@ -34,3 +34,10 @@ nbproject
 .CVS
 .idea
 node_modules
+bootstrap
+
+# Docs
+docs/*.html
+docs/assets/css/bootstrap-responsive.css
+docs/assets/css/bootstrap.css
+docs/assets/js/bootstrap.min.js
